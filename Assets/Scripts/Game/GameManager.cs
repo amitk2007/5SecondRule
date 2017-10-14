@@ -35,16 +35,12 @@ public class GameManager : MonoBehaviour
         switch (UnityEngine.Random.Range(1, 5))
         {
             case 1: //up
-                print(1);
                 return cam.ScreenToWorldPoint(new Vector3(UnityRandom(0,width), hight, 0));
             case 2: //down
-                print(2);
                 return cam.ScreenToWorldPoint(new Vector3(UnityRandom(0, width), 0, 0));
             case 3: //right
-                print(3);
                 return cam.ScreenToWorldPoint(new Vector3(width, UnityRandom(0,hight), 0));
             case 4: //left
-                print(4);
                 return cam.ScreenToWorldPoint(new Vector3(0, UnityRandom(0, hight), 0));
             default:
                 break;

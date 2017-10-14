@@ -29,9 +29,11 @@ public class FoodScript : MonoBehaviour
     {
 
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.transform.tag == "Bug")
+        print("collide");
+        if (other.transform.tag == "Bug")
         {
             //show ad
             if (Advertisement.IsReady())
@@ -43,5 +45,9 @@ public class FoodScript : MonoBehaviour
             //end game.
             Application.LoadLevel("MainMenu");
         }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        print("okokok");
     }
 }

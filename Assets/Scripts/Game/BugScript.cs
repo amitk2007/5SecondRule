@@ -10,6 +10,7 @@ public class BugScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        food = GameObject.FindGameObjectWithTag("Food");
         isAlive = true;
         transform.rotation = Quaternion.LookRotation(Vector3.forward, food.transform.position - transform.position);
     }
