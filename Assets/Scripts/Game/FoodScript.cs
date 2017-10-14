@@ -32,7 +32,6 @@ public class FoodScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        print("collide");
         if (other.transform.tag == "Bug")
         {
             //show ad

@@ -11,6 +11,8 @@ public class TimerScript : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
+        FoodScript.correntLevel = 1;
+        ShowText(levelText, FoodScript.correntLevel);
     }
         
     // Update is called once per frame
