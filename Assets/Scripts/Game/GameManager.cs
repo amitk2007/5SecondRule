@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     float startTime;
     Vector3 position;
     public float timeDelay;
-    public GameObject bug;
+    public float timeMinus;
+    public GameObject[] bugs;
     public Camera cam;
 
     // Use this for initialization
@@ -22,8 +23,9 @@ public class GameManager : MonoBehaviour
         if (startTime + timeDelay <= Time.time)
         {
             position = RandomVector3();
-            Instantiate(bug, position, Quaternion.identity);
+            InstantiateBugs();
             startTime = startTime + timeDelay;
+            timeDelay = timeDelay - timeMinus;
         }
     }
 
@@ -35,11 +37,11 @@ public class GameManager : MonoBehaviour
         switch (UnityEngine.Random.Range(1, 5))
         {
             case 1: //up
-                return cam.ScreenToWorldPoint(new Vector3(UnityRandom(0,width), hight, 0));
+                return cam.ScreenToWorldPoint(new Vector3(UnityRandom(0, width), hight, 0));
             case 2: //down
                 return cam.ScreenToWorldPoint(new Vector3(UnityRandom(0, width), 0, 0));
             case 3: //right
-                return cam.ScreenToWorldPoint(new Vector3(width, UnityRandom(0,hight), 0));
+                return cam.ScreenToWorldPoint(new Vector3(width, UnityRandom(0, hight), 0));
             case 4: //left
                 return cam.ScreenToWorldPoint(new Vector3(0, UnityRandom(0, hight), 0));
             default:
@@ -49,8 +51,44 @@ public class GameManager : MonoBehaviour
         //return new Vector3(0, 0, 0);
     }
 
+    //does not include V2
     private float UnityRandom(float v1, float v2)
     {
-        return UnityEngine.Random.Range(v1, v2);
+        return UnityEngine.Random.Range((int)v1, (int)v2);
+    }
+
+    public void InstantiateBugs()
+    {
+        GameObject bugObject = Instantiate(bugs[UnityEngine.Random.Range(0, bugs.Length)], position, Quaternion.identity);
+        if (bugObject.name.Contains("Bacteria"))
+        {
+            switch (UnityEngine.Random.Range(0, 7))
+            {
+                case 0:
+                    bugObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+                    break;
+                case 1:
+                    bugObject.GetComponent<SpriteRenderer>().color = Color.red;
+                    break;
+                case 2:
+                    bugObject.GetComponent<SpriteRenderer>().color = Color.magenta;
+                    break;
+                case 3:
+                    bugObject.GetComponent<SpriteRenderer>().color = Color.green;
+                    break;
+                case 4:
+                    bugObject.GetComponent<SpriteRenderer>().color = Color.cyan;
+                    break;
+                case 5:
+                    bugObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                    break;
+                case 6:
+                    bugObject.GetComponent<SpriteRenderer>().color = new Color(138,43,226);
+                    break;
+                default:
+                    bugObject.GetComponent<SpriteRenderer>().color = Color.white;
+                    break;
+            }
+        }
     }
 }
