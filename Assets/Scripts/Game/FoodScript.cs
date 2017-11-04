@@ -9,10 +9,13 @@ public class FoodScript : MonoBehaviour
 
     private string gameId = "1574872";
 
+    public static float playerCoins;
     public static float correntLevel;
+
     // Use this for initialization
     void Start()
     {
+        playerCoins = 0;
         if (Advertisement.isSupported)
         {
             Advertisement.Initialize(gameId, true);
@@ -34,13 +37,17 @@ public class FoodScript : MonoBehaviour
     {
         if (other.transform.tag == "Bug")
         {
-            //show ad
-            if (Advertisement.IsReady())
+            if (Random.Range(1, 3) == 2)
             {
-                Advertisement.Show();
+                //show ad
+                if (Advertisement.IsReady())
+                {
+                    Advertisement.Show();
+                }
             }
             //set points
             MenuScript.SetMaxedLevel(correntLevel);
+            MenuScript.SetCoinsCollected(playerCoins);
             //end game.
             Application.LoadLevel("MainMenu");
         }

@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
+        position = RandomVector3();
+        InstantiateBugs();
     }
 
     // Update is called once per frame
@@ -59,7 +61,7 @@ public class GameManager : MonoBehaviour
 
     public void InstantiateBugs()
     {
-        GameObject bugObject = Instantiate(bugs[UnityEngine.Random.Range(0, bugs.Length)], position, Quaternion.identity);
+        GameObject bugObject = Instantiate(bugs[UnityEngine.Random.Range(0, (int)MenuScript.maxBug)], position, Quaternion.identity);
         if (bugObject.name.Contains("Bacteria"))
         {
             switch (UnityEngine.Random.Range(0, 7))
